@@ -214,8 +214,8 @@
           ${agent.city || ''}${agent.city && agent.state ? ', ' : ''}${agent.state || ''}${agent.zip ? ' ' + agent.zip : ''}<br>
           ${agent.phone ? agent.phone + '<br>' : ''}
           ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
-          ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + agent.specialties + '</em><br>' : ''}
-          ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;">' + agent.bio + '</p>' : ''}
+          ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + (Array.isArray(agent.specialties) ? agent.specialties.join(', ') : agent.specialties) + '</em><br>' : ''}
+          ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;color:#333;">' + agent.bio + '</p>' : ''}
           ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span><br>' : ''}
           <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:10px;padding:8px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;">Contact Agent</button>
         `;
