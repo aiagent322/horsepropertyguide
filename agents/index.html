@@ -158,8 +158,10 @@
         return agent;
       });
 
-      // Sort by distance if available
+      // Sort: featured first, then by distance
       enriched.sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
         if (a.distance !== null && b.distance !== null) return a.distance - b.distance;
         if (a.distance !== null) return -1;
         if (b.distance !== null) return 1;
