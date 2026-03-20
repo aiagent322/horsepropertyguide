@@ -1,7 +1,7 @@
 (function(){
   const path = window.location.pathname;
   const links = [
-    { href: '/agents/', label: 'Find an Agent' },
+    { href: 'https://horsepropertyagents.com', label: 'Find an Agent', external: true },
     { href: '/qa/usda-loan-horse-property.html', label: 'Financing' },
     { href: '/qa/zoning-that-allows-horses.html', label: 'Zoning' },
     { href: '/guides/horse-property-red-flags.html', label: 'Guides' },
@@ -9,8 +9,9 @@
   ];
 
   const liItems = links.map(l => {
-    const active = path.startsWith(l.href.replace(/\/[^/]+\.html$/, '')) ? ' class="active"' : '';
-    return '<li><a href="' + l.href + '"' + active + '>' + l.label + '</a></li>';
+    const active = !l.external && path.startsWith(l.href.replace(/\/[^/]+\.html$/, '')) ? ' class="active"' : '';
+    const ext = l.external ? ' target="_blank" rel="noopener"' : '';
+    return '<li><a href="' + l.href + '"' + ext + active + '>' + l.label + '</a></li>';
   }).join('');
 
   const navEl = document.createElement('nav');
