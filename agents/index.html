@@ -183,6 +183,14 @@
       });
     }
 
+    function contactAgent(name, email) {
+      if (email) {
+        window.location.href = `mailto:${email}?subject=Horse Property Inquiry&body=Hi ${name}, I found your listing on HorsePropertyGuide.com and would like to connect.`;
+      } else {
+        alert('No email address available for this agent.');
+      }
+    }
+
     loadAgents();
   </script>
 
