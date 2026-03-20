@@ -2,14 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Find a Horse Property Agent Near You | HorsePropertyGuide.com</title>
-  <meta name="description" content="Find a horse property agent near you with experience in equestrian real estate, zoning, and rural financing.">
+  <title>Find Horse Property Agents Near You</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
-  <main style="max-width:700px;margin:40px auto;font-family:Arial, sans-serif;line-height:1.6;">
-    <h1>Find a Horse Property Agent Near You</h1>
-    <p>Connect with a real estate agent who specializes in horse property, equestrian zoning, and rural financing.</p>
+  <main style="max-width:800px;margin:40px auto;font-family:Arial, sans-serif;">
+
+    <h1>Horse Property Agents</h1>
+    <p>Find experienced agents specializing in horse property.</p>
+
+    <!-- FILTER -->
+    <label for="cityFilter">Filter by City:</label>
+    <select id="cityFilter">
+      <option value="">All Cities</option>
+    </select>
+
+    <div id="agents-list" style="margin-top:20px;">Loading agents...</div>
+
   </main>
+
+  <script>
+    const supabaseUrl = "https://odpdwkzxxfqzzxlnynew.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kcGR3a3p4eGZxenp4bG55bmV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjM1ODksImV4cCI6MjA4OTUzOTU4OX0.OLY9_7uByUs2VFR2FARncLykppkmzWa4vciuFATImF0";
+
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    let allAgents = [];
+
+    async function loadAgents() {
+      const { data, error } = await supabase
+        .from('agents')
+        .select('*')
+        .order('city');
+
+      const container = document.getElementById('agents-list');
+
+      if (error) {
+        container.innerHTML = "Error loading agents.";
+        console.error(error);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        container.innerHTML = "No agents found.";
+        return;
+      }
+
+      allAgents = data;
+
+      populateCityFilter(data);
+      renderAgents(data);
+    }
+
+    function populateCityFilter(data) {
+      const cities = [...new Set(data.map(a => a.city).filter(Boolean))];
+      const dropdown = document.getElementById('cityFilter');
+
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        dropdown.appendChild(option);
+      });
+
+      dropdown.addEventListener('change', () => {
+        const selected = dropdown.value;
+        const filtered = selected
+          ? allAgents.filter(a => a.city === selected)
+          : allAgents;
+        renderAgents(filtered);
+      });
+    }
+
+    function renderAgents(list) {
+      const container = document.getElementById('agents-list');
+      container.innerHTML = "";
+
+      list.forEach(agent => {
+        const div = document.createElement('div');
+        div.style.borderBottom = "1px solid #ccc";
+        div.style.padding = "10px 0";
+
+        div.innerHTML = `
+          <strong>${agent.name || 'Unnamed Agent'}</strong><br>
+          ${agent.city || ''}, ${agent.state || ''}<br>
+          ${agent.phone || ''}<br>
+          ${agent.email || ''}
+        `;
+
+        container.appendChild(div);
+      });
+    }
+
+    loadAgents();
+  </script>
+
 </body>
 </html>
