@@ -2,31 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Find Horse Property Agents Near You</title>
+  <title>Find Horse Property Agents Near You | HorsePropertyGuide.com</title>
+  <meta name="description" content="Find experienced horse property agents near you who understand zoning, water rights, and equestrian real estate.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
-  <main style="max-width:800px;margin:40px auto;font-family:Arial, sans-serif;">
+  <main style="max-width:800px;margin:40px auto;font-family:Arial, sans-serif;line-height:1.6;padding:0 16px;">
 
     <h1>Horse Property Agents</h1>
-    <p>Find experienced agents specializing in horse property.</p>
+    <p>Find experienced agents specializing in horse property, zoning, and equestrian real estate.</p>
 
-    <!-- FILTER -->
-    <label for="cityFilter">Filter by City:</label>
-    <select id="cityFilter">
-      <option value="">All Cities</option>
-    </select>
+    <!-- LOCATION SEARCH -->
+    <div style="margin:20px 0;">
+      <input type="text" id="location" placeholder="Enter city or zip" style="padding:10px;font-size:1em;width:240px;border:1px solid #ccc;border-radius:4px;">
+      <button onclick="searchAgents()" style="padding:10px 20px;font-size:1em;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;margin-left:8px;">Search</button>
+    </div>
 
-    <div id="agents-list" style="margin-top:20px;">Loading agents...</div>
+    <!-- CITY FILTER -->
+    <div style="margin-bottom:20px;">
+      <label for="cityFilter" style="margin-right:8px;">Filter by City:</label>
+      <select id="cityFilter" style="padding:8px;font-size:1em;border:1px solid #ccc;border-radius:4px;">
+        <option value="">All Cities</option>
+      </select>
+    </div>
+
+    <div id="agents-list">Loading agents...</div>
 
   </main>
 
   <script>
     const supabaseUrl = "https://odpdwkzxxfqzzxlnynew.supabase.co";
     const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kcGR3a3p4eGZxenp4bG55bmV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NjM1ODksImV4cCI6MjA4OTUzOTU4OX0.OLY9_7uByUs2VFR2FARncLykppkmzWa4vciuFATImF0";
-
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     let allAgents = [];
@@ -51,47 +59,67 @@
       }
 
       allAgents = data;
-
       populateCityFilter(data);
       renderAgents(data);
     }
 
     function populateCityFilter(data) {
-      const cities = [...new Set(data.map(a => a.city).filter(Boolean))];
+      const cities = [...new Set(data.map(a => a.city).filter(Boolean))].sort();
       const dropdown = document.getElementById('cityFilter');
-
       cities.forEach(city => {
         const option = document.createElement('option');
         option.value = city;
         option.textContent = city;
         dropdown.appendChild(option);
       });
-
       dropdown.addEventListener('change', () => {
         const selected = dropdown.value;
-        const filtered = selected
-          ? allAgents.filter(a => a.city === selected)
-          : allAgents;
+        const filtered = selected ? allAgents.filter(a => a.city === selected) : allAgents;
         renderAgents(filtered);
       });
     }
 
+    function searchAgents() {
+      const query = document.getElementById('location').value.trim().toLowerCase();
+      if (!query) {
+        renderAgents(allAgents);
+        return;
+      }
+      const filtered = allAgents.filter(a =>
+        (a.city && a.city.toLowerCase().includes(query)) ||
+        (a.zip && a.zip.toLowerCase().includes(query)) ||
+        (a.state && a.state.toLowerCase().includes(query))
+      );
+      document.getElementById('cityFilter').value = '';
+      renderAgents(filtered);
+    }
+
+    // Allow Enter key to trigger search
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('location').addEventListener('keydown', e => {
+        if (e.key === 'Enter') searchAgents();
+      });
+    });
+
     function renderAgents(list) {
       const container = document.getElementById('agents-list');
+      if (list.length === 0) {
+        container.innerHTML = "<p>No agents found for that location.</p>";
+        return;
+      }
       container.innerHTML = "";
-
       list.forEach(agent => {
         const div = document.createElement('div');
-        div.style.borderBottom = "1px solid #ccc";
-        div.style.padding = "10px 0";
-
+        div.style.borderBottom = "1px solid #ddd";
+        div.style.padding = "16px 0";
         div.innerHTML = `
-          <strong>${agent.name || 'Unnamed Agent'}</strong><br>
-          ${agent.city || ''}, ${agent.state || ''}<br>
-          ${agent.phone || ''}<br>
-          ${agent.email || ''}
+          <strong style="font-size:1.1em;">${agent.name || 'Unnamed Agent'}</strong><br>
+          ${agent.city || ''}${agent.city && agent.state ? ', ' : ''}${agent.state || ''}${agent.zip ? ' ' + agent.zip : ''}<br>
+          ${agent.phone ? agent.phone + '<br>' : ''}
+          ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
+          ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + agent.specialties + '</em><br>' : ''}
+          ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;">' + agent.bio + '</p>' : ''}
         `;
-
         container.appendChild(div);
       });
     }
