@@ -17,7 +17,7 @@
     <h2>Find Horse Property Agents Near You</h2>
     <p>Search by city or allow location access to find agents closest to you.</p>
 
-        <!-- SEARCH UI -->
+    <!-- SEARCH UI -->
     <div style="margin-bottom:20px;">
       <input id="searchInput" type="text" placeholder="Enter city or zip"
         style="padding:10px;width:250px;font-size:1em;border:1px solid #ccc;border-radius:4px;">
@@ -41,7 +41,7 @@
 
   </main>
 
-  <!-- AUTO-DETECT LOCATION -->
+  <!-- GEOLOCATION + DISTANCE -->
   <script>
   let userLat = null;
   let userLng = null;
@@ -54,9 +54,7 @@
 
         const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLng}&format=json`);
         const data = await res.json();
-
         const city = data.address.city || data.address.town || data.address.village;
-
         if (city) {
           document.getElementById('searchInput').value = city;
           searchAgents();
@@ -66,7 +64,7 @@
   }
 
   function haversineDistance(lat1, lng1, lat2, lng2) {
-    const R = 3958.8; // miles
+    const R = 3958.8;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLng = (lng2 - lng1) * Math.PI / 180;
     const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -90,17 +88,8 @@
         .order('city');
 
       const container = document.getElementById('agents-list');
-
-      if (error) {
-        container.innerHTML = "Error loading agents.";
-        console.error(error);
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        container.innerHTML = "No agents found.";
-        return;
-      }
+      if (error) { container.innerHTML = "Error loading agents."; return; }
+      if (!data || data.length === 0) { container.innerHTML = "No agents found."; return; }
 
       allAgents = data;
       populateCityFilter(data);
@@ -119,23 +108,46 @@
       });
       dropdown.addEventListener('change', () => {
         const selected = dropdown.value;
-        const filtered = selected ? allAgents.filter(a => a.city === selected) : allAgents;
+        const base = selected ? allAgents.filter(a => a.city === selected) : allAgents;
         document.getElementById('searchInput').value = '';
-        renderAgents(filtered);
+        renderAgents(base);
       });
     }
 
     function searchAgents() {
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
-      if (!query) {
-        renderAgents(allAgents);
-        return;
-      }
-      const filtered = allAgents.filter(a =>
-        (a.city && a.city.toLowerCase().includes(query)) ||
-        (a.zip && a.zip.toLowerCase().includes(query)) ||
-        (a.state && a.state.toLowerCase().includes(query))
-      );
+      const radius = parseInt(document.getElementById('radiusSelect').value);
+
+      // Start from full list, text-filter first
+      let base = query
+        ? allAgents.filter(a =>
+            (a.city && a.city.toLowerCase().includes(query)) ||
+            (a.zip && a.zip.toLowerCase().includes(query)) ||
+            (a.state && a.state.toLowerCase().includes(query))
+          )
+        : allAgents;
+
+      // Attach distance and apply radius filter
+      const filtered = base
+        .map(agent => {
+          if (!agent.lat || !agent.lng) return { ...agent, distance: null };
+          const distance = haversineDistance(userLat || 0, userLng || 0, agent.lat, agent.lng);
+          return { ...agent, distance };
+        })
+        .filter(a => {
+          if (!userLat || !userLng) return true;       // no location = show all
+          if (a.distance === null) return true;         // no coords = always include
+          return a.distance < radius;
+        })
+        .sort((a, b) => {
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          if (a.distance !== null && b.distance !== null) return a.distance - b.distance;
+          if (a.distance !== null) return -1;
+          if (b.distance !== null) return 1;
+          return 0;
+        });
+
       document.getElementById('cityFilter').value = '';
       renderAgents(filtered);
     }
@@ -144,6 +156,7 @@
       document.getElementById('searchInput').addEventListener('keydown', e => {
         if (e.key === 'Enter') searchAgents();
       });
+      document.getElementById('radiusSelect').addEventListener('change', searchAgents);
     });
 
     function renderAgents(list) {
@@ -152,34 +165,13 @@
         container.innerHTML = "<p>No agents found in this area.</p>";
         return;
       }
-
-      // Attach distance if user location is known
-      const enriched = list.map(agent => {
-        if (userLat && userLng && agent.lat && agent.lng) {
-          agent.distance = haversineDistance(userLat, userLng, agent.lat, agent.lng);
-        } else {
-          agent.distance = null;
-        }
-        return agent;
-      });
-
-      // Sort: featured first, then by distance
-      enriched.sort((a, b) => {
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        if (a.distance !== null && b.distance !== null) return a.distance - b.distance;
-        if (a.distance !== null) return -1;
-        if (b.distance !== null) return 1;
-        return 0;
-      });
-
       container.innerHTML = "";
-      enriched.forEach(agent => {
+      list.forEach(agent => {
         const div = document.createElement('div');
         div.style.borderBottom = "1px solid #ddd";
         div.style.padding = "16px 0";
         div.innerHTML = `
-          <strong style="font-size:1.1em;">${agent.name || 'Unnamed Agent'}</strong><br>
+          <strong style="font-size:1.1em;">${agent.name || 'Unnamed Agent'}</strong>${agent.featured ? ' <span style="background:#2c5f2e;color:#fff;font-size:0.75em;padding:2px 7px;border-radius:3px;vertical-align:middle;">Featured</span>' : ''}<br>
           ${agent.city || ''}${agent.city && agent.state ? ', ' : ''}${agent.state || ''}${agent.zip ? ' ' + agent.zip : ''}<br>
           ${agent.phone ? agent.phone + '<br>' : ''}
           ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
