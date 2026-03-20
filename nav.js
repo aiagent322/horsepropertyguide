@@ -1,7 +1,7 @@
 (function(){
   const path = window.location.pathname;
   const links = [
-    { href: 'https://horsepropertyagents.com', label: 'Find an Agent', external: true },
+    { href: '/agents/', label: 'Find an Agent' },
     { href: '/qa/usda-loan-horse-property.html', label: 'Financing' },
     { href: '/qa/zoning-that-allows-horses.html', label: 'Zoning' },
     { href: '/guides/horse-property-red-flags.html', label: 'Guides' },
