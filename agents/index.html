@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Find Horse Property Agents Near You | HorsePropertyGuide.com</title>
   <meta name="description" content="Find experienced horse property agents near you who understand zoning, water rights, and equestrian real estate.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -96,7 +97,8 @@
       const { data, error } = await _supabaseClient
         .from('agents')
         .select('*')
-        .order('city');
+        .order('city')
+        .limit(1000);
 
       const container = document.getElementById('agents-list');
       if (error) { container.innerHTML = "Error loading agents."; return; }
@@ -133,7 +135,8 @@
         ? allAgents.filter(a =>
             (a.city && a.city.toLowerCase().includes(query)) ||
             (a.zip && a.zip.toLowerCase().includes(query)) ||
-            (a.state && a.state.toLowerCase().includes(query))
+            (a.state && a.state.toLowerCase().includes(query)) ||
+            (a.name && a.name.toLowerCase().includes(query))
           )
         : allAgents;
 
