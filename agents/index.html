@@ -37,6 +37,16 @@
       </select>
     </div>
 
+    <!-- CONTACT FORM -->
+    <div id="contactForm" style="display:none;background:#f9f9f9;border:1px solid #ccc;border-radius:6px;padding:20px;margin-bottom:24px;">
+      <h3 style="margin-top:0;">Contact Agent</h3>
+      <input id="userName" placeholder="Your Name" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"><br>
+      <input id="userEmail" placeholder="Your Email" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"><br>
+      <textarea id="message" placeholder="Message" rows="4" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"></textarea><br>
+      <button onclick="sendLead()" style="padding:10px 24px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1em;">Send</button>
+      <button onclick="document.getElementById('contactForm').style.display='none'" style="padding:10px 16px;margin-left:10px;background:#ccc;border:none;border-radius:4px;cursor:pointer;font-size:1em;">Cancel</button>
+    </div>
+
     <div id="agents-list">Loading agents...</div>
 
   </main>
@@ -80,6 +90,7 @@
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     let allAgents = [];
+    let selectedAgent = null;
 
     async function loadAgents() {
       const { data, error } = await supabase
@@ -118,7 +129,6 @@
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const radius = parseInt(document.getElementById('radiusSelect').value);
 
-      // Start from full list, text-filter first
       let base = query
         ? allAgents.filter(a =>
             (a.city && a.city.toLowerCase().includes(query)) ||
@@ -127,7 +137,6 @@
           )
         : allAgents;
 
-      // Attach distance and apply radius filter
       const filtered = base
         .map(agent => {
           if (!agent.lat || !agent.lng) return { ...agent, distance: null };
@@ -135,8 +144,8 @@
           return { ...agent, distance };
         })
         .filter(a => {
-          if (!userLat || !userLng) return true;       // no location = show all
-          if (a.distance === null) return true;         // no coords = always include
+          if (!userLat || !userLng) return true;
+          if (a.distance === null) return true;
           return a.distance < radius;
         })
         .sort((a, b) => {
@@ -150,6 +159,33 @@
 
       document.getElementById('cityFilter').value = '';
       renderAgents(filtered);
+    }
+
+    function contactAgent(name, email) {
+      selectedAgent = { name, email };
+      document.getElementById('contactForm').style.display = 'block';
+      document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    async function sendLead() {
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      console.log("Lead:", { agent: selectedAgent, name, email, message });
+
+      // Reset form
+      document.getElementById('userName').value = '';
+      document.getElementById('userEmail').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('contactForm').style.display = 'none';
+
+      alert('Message sent!');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -177,18 +213,11 @@
           ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
           ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + agent.specialties + '</em><br>' : ''}
           ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;">' + agent.bio + '</p>' : ''}
-          ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span>' : ''}
+          ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span><br>' : ''}
+          <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:10px;padding:8px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;">Contact Agent</button>
         `;
         container.appendChild(div);
       });
-    }
-
-    function contactAgent(name, email) {
-      if (email) {
-        window.location.href = `mailto:${email}?subject=Horse Property Inquiry&body=Hi ${name}, I found your listing on HorsePropertyGuide.com and would like to connect.`;
-      } else {
-        alert('No email address available for this agent.');
-      }
     }
 
     loadAgents();
