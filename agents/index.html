@@ -35,13 +35,16 @@
 
   <!-- AUTO-DETECT LOCATION -->
   <script>
+  let userLat = null;
+  let userLng = null;
+
   function getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
+        userLat = position.coords.latitude;
+        userLng = position.coords.longitude;
 
-        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLng}&format=json`);
         const data = await res.json();
 
         const city = data.address.city || data.address.town || data.address.village;
@@ -52,6 +55,16 @@
         }
       });
     }
+  }
+
+  function haversineDistance(lat1, lng1, lat2, lng2) {
+    const R = 3958.8; // miles
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   }
   </script>
 
@@ -84,8 +97,6 @@
       allAgents = data;
       populateCityFilter(data);
       renderAgents(data);
-
-      // Auto-detect location after agents load
       getUserLocation();
     }
 
@@ -133,8 +144,27 @@
         container.innerHTML = "<p>No agents found for that location.</p>";
         return;
       }
+
+      // Attach distance if user location is known
+      const enriched = list.map(agent => {
+        if (userLat && userLng && agent.lat && agent.lng) {
+          agent.distance = haversineDistance(userLat, userLng, agent.lat, agent.lng);
+        } else {
+          agent.distance = null;
+        }
+        return agent;
+      });
+
+      // Sort by distance if available
+      enriched.sort((a, b) => {
+        if (a.distance !== null && b.distance !== null) return a.distance - b.distance;
+        if (a.distance !== null) return -1;
+        if (b.distance !== null) return 1;
+        return 0;
+      });
+
       container.innerHTML = "";
-      list.forEach(agent => {
+      enriched.forEach(agent => {
         const div = document.createElement('div');
         div.style.borderBottom = "1px solid #ddd";
         div.style.padding = "16px 0";
@@ -145,6 +175,7 @@
           ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
           ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + agent.specialties + '</em><br>' : ''}
           ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;">' + agent.bio + '</p>' : ''}
+          ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span>' : ''}
         `;
         container.appendChild(div);
       });
