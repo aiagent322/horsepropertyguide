@@ -134,11 +134,9 @@
       let base = query
         ? allAgents.filter(a =>
             (a.city && a.city.toLowerCase().includes(query)) ||
-            (a.zip && a.zip.toLowerCase().includes(query)) ||
-            (a.state && a.state.toLowerCase().includes(query)) ||
-            (a.name && a.name.toLowerCase().includes(query))
+            (a.zip && a.zip.toLowerCase().includes(query))
           )
-        : allAgents;
+        : allAgents.filter(a => a.city && a.city.trim() !== '');
 
       const filtered = base
         .map(agent => {
