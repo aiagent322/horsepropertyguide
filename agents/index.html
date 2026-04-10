@@ -219,7 +219,7 @@
           ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + (Array.isArray(agent.specialties) ? agent.specialties.join(', ') : agent.specialties) + '</em><br>' : ''}
           ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;color:#333;">' + agent.bio + '</p>' : ''}
           ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span><br>' : ''}
-          <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:10px;padding:8px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;">Contact Agent</button>
+          <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:10px;padding:12px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;display:block;width:100%;text-align:center;box-sizing:border-box;">Contact Agent</button>
         `;
         container.appendChild(div);
       });
