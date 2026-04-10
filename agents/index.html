@@ -211,15 +211,19 @@
         const div = document.createElement('div');
         div.style.borderBottom = "1px solid #ddd";
         div.style.padding = "16px 0";
+        const location = [agent.city, agent.state].filter(Boolean).join(', ') + (agent.zip ? ' ' + agent.zip : '');
         div.innerHTML = `
-          <strong style="font-size:1.1em;">${agent.name || 'Unnamed Agent'}</strong>${agent.featured ? ' <span style="background:#2c5f2e;color:#fff;font-size:0.75em;padding:2px 7px;border-radius:3px;vertical-align:middle;">Featured</span>' : ''}<br>
-          ${agent.city || ''}${agent.city && agent.state ? ', ' : ''}${agent.state || ''}${agent.zip ? ' ' + agent.zip : ''}<br>
-          ${agent.phone ? agent.phone + '<br>' : ''}
-          ${agent.email ? '<a href="mailto:' + agent.email + '">' + agent.email + '</a><br>' : ''}
-          ${agent.specialties ? '<em style="color:#555;font-size:0.9em;">' + (Array.isArray(agent.specialties) ? agent.specialties.join(', ') : agent.specialties) + '</em><br>' : ''}
-          ${agent.bio ? '<p style="margin:6px 0 0;font-size:0.95em;color:#333;">' + agent.bio + '</p>' : ''}
-          ${agent.distance !== null ? '<span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span><br>' : ''}
-          <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:10px;padding:12px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;display:block;width:100%;text-align:center;box-sizing:border-box;">Contact Agent</button>
+          <div style="margin-bottom:4px;">
+            <strong style="font-size:1.1em;">${agent.name || 'Unnamed Agent'}</strong>
+            ${agent.featured ? ' <span style="background:#2c5f2e;color:#fff;font-size:0.75em;padding:2px 7px;border-radius:3px;vertical-align:middle;">Featured</span>' : ''}
+          </div>
+          ${location ? '<div style="color:#444;font-size:0.95em;">' + location + '</div>' : ''}
+          ${agent.phone ? '<div style="margin-top:4px;"><a href="tel:' + agent.phone.replace(/[^0-9+]/g, '') + '" style="color:#2c5f2e;text-decoration:none;font-size:0.95em;">' + agent.phone + '</a></div>' : ''}
+          ${agent.email ? '<div style="margin-top:2px;"><a href="mailto:' + agent.email + '" style="color:#2c5f2e;text-decoration:none;font-size:0.95em;">' + agent.email + '</a></div>' : ''}
+          ${agent.specialties ? '<div style="margin-top:6px;"><em style="color:#555;font-size:0.9em;">' + (Array.isArray(agent.specialties) ? agent.specialties.join(', ') : agent.specialties) + '</em></div>' : ''}
+          ${agent.bio ? '<div style="margin-top:8px;font-size:0.95em;color:#333;line-height:1.6;">' + agent.bio + '</div>' : ''}
+          ${agent.distance !== null ? '<div style="margin-top:6px;"><span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span></div>' : ''}
+          <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:12px;padding:12px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;display:block;width:100%;text-align:center;box-sizing:border-box;">Contact Agent</button>
         `;
         container.appendChild(div);
       });
