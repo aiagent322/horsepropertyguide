@@ -95,6 +95,12 @@
 @media (max-width: 480px) {
   main p { max-width: 100%; }
 }
+/* Content page H2 spacing — Key Takeaways, Key Points, Key Risks */
+main h2:not(.related-heading) {
+  margin-top: 36px;
+  padding-top: 4px;
+}
+
 /* Related section styling — scoped to .related-heading class only */
 h2.related-heading {
   margin-top: 32px;
