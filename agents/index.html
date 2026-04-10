@@ -7,7 +7,6 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- v1773984919 -->
 </head>
 
 <body>
@@ -20,7 +19,7 @@
 
     <!-- SEARCH UI -->
     <div style="margin-bottom:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-      <input id="searchInput" type="text" placeholder="Enter city (e.g. Scottsdale)"
+      <input id="searchInput" type="search" placeholder="Enter city (e.g. Scottsdale)" autocomplete="off" autocorrect="off" autocapitalize="words"
         style="padding:10px;flex:1;min-width:0;font-size:1em;border:1px solid #ccc;border-radius:4px;">
       <button onclick="searchAgents()" style="padding:10px 20px;font-size:1em;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;">Search</button>
       <select id="radiusSelect" style="padding:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;">
@@ -41,8 +40,8 @@
     <!-- CONTACT FORM -->
     <div id="contactForm" style="display:none;background:#f9f9f9;border:1px solid #ccc;border-radius:6px;padding:20px;margin-bottom:24px;">
       <h3 style="margin-top:0;">Contact Agent</h3>
-      <input id="userName" placeholder="Your Name" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
-      <input id="userEmail" placeholder="Your Email" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+      <input id="userName" placeholder="Your Name" autocomplete="name" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
+      <input id="userEmail" type="email" placeholder="Your Email" autocomplete="email" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
       <textarea id="message" placeholder="Message" rows="4" style="display:block;width:100%;padding:9px;margin-bottom:10px;font-size:1em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;"></textarea>
       <button onclick="sendLead()" style="padding:14px 24px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:1em;width:100%;display:block;box-sizing:border-box;">Send</button>
       <button onclick="document.getElementById('contactForm').style.display='none'" style="padding:14px 16px;margin-top:8px;background:#ccc;border:none;border-radius:4px;cursor:pointer;font-size:1em;width:100%;display:block;box-sizing:border-box;">Cancel</button>
