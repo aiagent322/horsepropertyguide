@@ -181,15 +181,17 @@
       sendBtn.disabled = true;
       sendBtn.textContent = 'Sending...';
 
+      const leadData = {
+        agent_name: selectedAgent ? selectedAgent.name : null,
+        agent_email: selectedAgent ? selectedAgent.email : null,
+        sender_name: name,
+        sender_email: email,
+        message: message
+      };
+
       const { error } = await _supabaseClient
         .from('leads')
-        .insert({
-          agent_name: selectedAgent ? selectedAgent.name : null,
-          agent_email: selectedAgent ? selectedAgent.email : null,
-          sender_name: name,
-          sender_email: email,
-          message: message
-        });
+        .insert(leadData);
 
       if (error) {
         alert('Something went wrong. Please try again.');
@@ -197,6 +199,13 @@
         sendBtn.textContent = 'Send';
         return;
       }
+
+      // Fire-and-forget email notification via Cloudflare Worker
+      fetch('https://horsepropertyguide-leads.bridleandbit.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData)
+      }).catch(() => {}); // silent fail — lead is already saved
 
       // Reset form
       document.getElementById('userName').value = '';
