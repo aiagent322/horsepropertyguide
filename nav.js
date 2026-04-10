@@ -92,12 +92,9 @@
   .nav-inner { padding: 0 24px; }
   .logo-short { display: none; }
 }
-@media (max-width: 480px) {
-  main p { max-width: 100%; }
-}
-/* Content page H1 top spacing */
-main h1 {
-  margin-top: 24px;
+/* Content page H1 top spacing — excludes homepage via section wrapper */
+main > h1 {
+  margin-top: 20px;
 }
 
 /* Content page H2 spacing — Key Takeaways, Key Points, Key Risks */
