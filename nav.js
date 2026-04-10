@@ -95,6 +95,11 @@
 @media (max-width: 480px) {
   main p { max-width: 100%; }
 }
+/* Content page H1 top spacing */
+main h1 {
+  margin-top: 24px;
+}
+
 /* Content page H2 spacing — Key Takeaways, Key Points, Key Risks */
 main h2:not(.related-heading) {
   margin-top: 36px;
