@@ -222,7 +222,7 @@
           ${agent.email ? '<div style="margin-top:2px;"><a href="mailto:' + agent.email + '" style="color:#2c5f2e;text-decoration:none;font-size:0.95em;">' + agent.email + '</a></div>' : ''}
           ${agent.specialties ? '<div style="margin-top:6px;"><em style="color:#555;font-size:0.9em;">' + (Array.isArray(agent.specialties) ? agent.specialties.join(', ') : agent.specialties) + '</em></div>' : ''}
           ${agent.bio ? '<div style="margin-top:8px;font-size:0.95em;color:#333;line-height:1.6;">' + agent.bio + '</div>' : ''}
-          ${agent.distance !== null ? '<div style="margin-top:6px;"><span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span></div>' : ''}
+          ${userLat && userLng && agent.distance !== null ? '<div style="margin-top:6px;"><span style="color:#2c5f2e;font-size:0.9em;">' + agent.distance.toFixed(1) + ' miles away</span></div>' : ''}
           <button onclick="contactAgent('${agent.name}', '${agent.email}')" style="margin-top:12px;padding:12px 18px;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.95em;display:block;width:100%;text-align:center;box-sizing:border-box;">Contact Agent</button>
         `;
         container.appendChild(div);
