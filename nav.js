@@ -136,6 +136,19 @@ h2.related-heading + ul li a:hover {
   `;
 
   document.head.appendChild(style);
+
+  // Fix 6: robots meta
+  const robots = document.createElement('meta');
+  robots.name = 'robots';
+  robots.content = 'index, follow';
+  document.head.appendChild(robots);
+
+  // Fix 9: canonical tag
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = window.location.origin + window.location.pathname;
+  document.head.appendChild(canonical);
+
   document.body.insertBefore(navEl, document.body.firstChild);
 
   document.getElementById('nav-btn').addEventListener('click', function() {
