@@ -95,12 +95,8 @@
 @media (max-width: 480px) {
   main p { max-width: 100%; }
 }
-/* Related section styling */
-main h2:last-of-type,
-main h2 + ul {
-  margin-top: 0;
-}
-main > h2:last-of-type {
+/* Related section styling — scoped to .related-heading class only */
+h2.related-heading {
   margin-top: 32px;
   padding-top: 16px;
   border-top: 2px solid #e8e0d8;
@@ -109,24 +105,24 @@ main > h2:last-of-type {
   letter-spacing: 0.06em;
   color: #666;
 }
-main > h2:last-of-type + ul {
+h2.related-heading + ul {
   list-style: none;
   padding-left: 0;
   margin-top: 10px;
 }
-main > h2:last-of-type + ul li {
+h2.related-heading + ul li {
   border-bottom: 1px solid #eee;
   padding: 10px 0;
 }
-main > h2:last-of-type + ul li:last-child {
+h2.related-heading + ul li:last-child {
   border-bottom: none;
 }
-main > h2:last-of-type + ul li a {
+h2.related-heading + ul li a {
   color: #2c5f2e;
   text-decoration: none;
   font-size: 0.97em;
 }
-main > h2:last-of-type + ul li a:hover {
+h2.related-heading + ul li a:hover {
   text-decoration: underline;
 }
   `;
