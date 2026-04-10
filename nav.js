@@ -18,7 +18,7 @@
   navEl.id = 'site-nav';
   navEl.innerHTML =
     '<div class="nav-inner">' +
-      '<a href="/" class="nav-logo">HorsePropertyGuide.com</a>' +
+      '<a href="/" class="nav-logo"><span class="logo-full">HorsePropertyGuide.com</span><span class="logo-short">Horse Property</span></a>' +
       '<button class="nav-toggle" id="nav-btn" aria-label="Menu"><span></span><span></span><span></span></button>' +
       '<ul class="nav-links">' + liItems + '</ul>' +
     '</div>';
@@ -72,7 +72,9 @@
   background: rgba(255,255,255,.85); border-radius: 2px;
 }
 @media (max-width: 640px) {
-  .nav-logo { font-size: .82rem; }
+  .nav-logo { font-size: .9rem; }
+  .logo-full { display: none; }
+  .logo-short { display: inline; }
   .nav-toggle { display: flex; }
   .nav-links {
     display: none; position: absolute;
@@ -88,6 +90,10 @@
 }
 @media (min-width: 641px) {
   .nav-inner { padding: 0 24px; }
+  .logo-short { display: none; }
+}
+@media (max-width: 480px) {
+  main p { max-width: 100%; }
 }
   `;
 
