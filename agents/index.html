@@ -177,15 +177,36 @@
         return;
       }
 
-      console.log("Lead:", { agent: selectedAgent, name, email, message });
+      const sendBtn = document.querySelector('#contactForm button');
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending...';
+
+      const { error } = await _supabaseClient
+        .from('leads')
+        .insert({
+          agent_name: selectedAgent ? selectedAgent.name : null,
+          agent_email: selectedAgent ? selectedAgent.email : null,
+          sender_name: name,
+          sender_email: email,
+          message: message
+        });
+
+      if (error) {
+        alert('Something went wrong. Please try again.');
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send';
+        return;
+      }
 
       // Reset form
       document.getElementById('userName').value = '';
       document.getElementById('userEmail').value = '';
       document.getElementById('message').value = '';
       document.getElementById('contactForm').style.display = 'none';
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send';
 
-      alert('Message sent!');
+      alert('Message sent! The agent will be in touch shortly.');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
