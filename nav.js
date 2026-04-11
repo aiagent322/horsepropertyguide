@@ -92,6 +92,15 @@
   .nav-inner { padding: 0 24px; }
   .logo-short { display: none; }
 }
+/* Page main container */
+.page-main {
+  max-width: 700px;
+  margin: 20px auto;
+  font-family: Georgia, serif;
+  line-height: 1.7;
+  padding: 0 16px;
+}
+
 /* Content page H1 top spacing — excludes homepage via section wrapper */
 main > h1 {
   margin-top: 20px;
