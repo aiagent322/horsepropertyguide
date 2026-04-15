@@ -25,6 +25,8 @@
 
   const style = document.createElement('style');
   style.textContent = `
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; overflow-x: hidden; }
 #site-nav {
   background: #2c5f2e;
   position: sticky; top: 0; z-index: 200;
