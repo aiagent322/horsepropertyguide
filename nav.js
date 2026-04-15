@@ -101,6 +101,22 @@
   padding: 0 16px;
 }
 
+/* Content list items — touch-friendly minimum height */
+.page-main ul li {
+  padding: 6px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* Override for related links which have their own styling */
+h2.related-heading + ul li {
+  padding: 13px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
 /* Mobile H1 — long market page titles need reduction */
 @media (max-width: 480px) {
   .page-main h1 {
