@@ -17,7 +17,22 @@
     <h1>Find a Horse Property Agent Near You</h1>
     <p>Search by city or allow location access to find agents closest to you. Use city names such as Scottsdale, Gilbert, or Wickenburg.</p>
 
-    <!-- SEARCH UI -->\n    <div style="margin-bottom:20px;">\n      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;">\n        <input id="searchInput" type="search" placeholder="Enter city (e.g. Scottsdale)" autocomplete="off" autocorrect="off" autocapitalize="words"\n          style="padding:10px;flex:1;min-width:0;font-size:16px;border:1px solid #ccc;border-radius:4px;">\n        <button onclick="searchAgents()" style="padding:10px 20px;font-size:1em;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;min-height:44px;">Search</button>\n      </div>\n      <div style="display:flex;align-items:center;gap:8px;">\n        <label for="radiusSelect" style="font-size:0.95em;white-space:nowrap;">Radius:</label>\n        <select id="radiusSelect" style="padding:10px;font-size:16px;border:1px solid #ccc;border-radius:4px;flex:1;">\n          <option value="25">25 miles</option>\n          <option value="50" selected>50 miles</option>\n          <option value="100">100 miles</option>\n        </select>\n      </div>\n    </div>
+    <!-- SEARCH UI -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;">
+        <input id="searchInput" type="search" placeholder="Enter city (e.g. Scottsdale)" autocomplete="off" autocorrect="off" autocapitalize="words"
+          style="padding:10px;flex:1;min-width:0;font-size:16px;border:1px solid #ccc;border-radius:4px;">
+        <button onclick="searchAgents()" style="padding:10px 20px;font-size:1em;background:#2c5f2e;color:#fff;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;min-height:44px;">Search</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <label for="radiusSelect" style="font-size:0.95em;white-space:nowrap;">Radius:</label>
+        <select id="radiusSelect" style="padding:10px;font-size:16px;border:1px solid #ccc;border-radius:4px;flex:1;">
+          <option value="25">25 miles</option>
+          <option value="50" selected>50 miles</option>
+          <option value="100">100 miles</option>
+        </select>
+      </div>
+    </div>
 
     <!-- CITY FILTER -->
     <div style="margin-bottom:20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
