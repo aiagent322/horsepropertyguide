@@ -101,6 +101,14 @@
   padding: 0 16px;
 }
 
+/* Mobile H1 — long market page titles need reduction */
+@media (max-width: 480px) {
+  .page-main h1 {
+    font-size: 1.35em;
+    line-height: 1.3;
+  }
+}
+
 /* Content page H1 top spacing — excludes homepage via section wrapper */
 main > h1 {
   margin-top: 20px;
@@ -129,7 +137,10 @@ h2.related-heading + ul {
 }
 h2.related-heading + ul li {
   border-bottom: 1px solid #eee;
-  padding: 10px 0;
+  padding: 13px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 h2.related-heading + ul li:last-child {
   border-bottom: none;
