@@ -2,7 +2,7 @@
   const path = window.location.pathname;
   const links = [
     { href: '/agents/', label: 'Find an Agent' },
-    { href: '/qa/usda-loan-horse-property.html', label: 'Financing' },
+    { href: '/financing/', label: 'Financing' },
     { href: '/qa/zoning-that-allows-horses.html', label: 'Zoning' },
     { href: '/guides/horse-property-red-flags.html', label: 'Guides' },
     { href: '/glossary/water-rights.html', label: 'Glossary' },
