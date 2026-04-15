@@ -7,7 +7,7 @@
     { href: '/guides/', label: 'Guides' },
     { href: '/qa/', label: 'Q&A' },
     { href: '/glossary/', label: 'Glossary' },
-    { href: '/agents/', label: 'Find an Agent' },
+    { href: 'https://www.horsepropertyagents.com', label: 'Find an Agent' },
   ];
 
   const secondary = [

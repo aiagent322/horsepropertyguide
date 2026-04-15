@@ -6,39 +6,118 @@
   <meta name="description" content="Learn how to buy, finance, and develop horse property. Find agents, understand zoning, and avoid costly mistakes.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-@media (max-width: 480px) {
-  main h1 { font-size: 1.45em !important; }
-  main { margin-top: 8px !important; padding: 0 12px !important; }
-  main section:first-child { padding-top: 20px !important; }
-  main section p { font-size: 1em !important; }
-  main section ul { padding-left: 14px !important; }
-  main section ul li { padding: 8px 0 !important; min-height: 44px !important; }
+/* ── Mobile-first base ── */
+.hp-main {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: Georgia, serif;
+  line-height: 1.7;
+  padding: 0 16px;
 }
-/* Category section visual separation */
-#site-nav ~ main section h3 {
-  margin-top: 24px;
+
+/* Hero */
+.hp-hero {
+  padding: 28px 0 24px;
+  text-align: center;
+}
+.hp-hero h1 {
+  font-size: 1.5em;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+.hp-hero p {
+  font-size: 1em;
+  margin: 0 0 16px;
+  color: #444;
+}
+
+/* CTA button */
+.hp-cta {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 20px;
+  background: #8b5e3c;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+  line-height: 1.3;
+}
+.hp-cta:hover { background: #a06b44; }
+
+/* Divider */
+.hp-hr {
+  border: none;
+  border-top: 1px solid #e8e0d8;
+  margin: 4px 0;
+}
+
+/* Sections */
+.hp-section {
+  padding: 24px 0;
+}
+.hp-section h2 {
+  font-size: 1.2em;
+  margin: 0 0 14px;
+}
+.hp-section ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+.hp-section ul li {
+  padding: 9px 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0ebe4;
+}
+.hp-section ul li:last-child { border-bottom: none; }
+.hp-section ul li a {
+  color: #2c5f2e;
+  text-decoration: none;
+  font-size: 0.97em;
+}
+.hp-section ul li a:hover { text-decoration: underline; }
+
+/* Category h3 */
+.hp-section h3 {
+  margin: 22px 0 4px;
   padding: 8px 12px;
   background: #f4f0eb;
   border-left: 4px solid #8b5e3c;
   border-radius: 2px;
-  font-size: 1em;
+  font-size: 0.95em;
   letter-spacing: 0.02em;
 }
-#site-nav ~ main section ul {
-  margin-top: 6px;
-  margin-bottom: 4px;
-  padding-left: 18px;
+
+/* Footer note */
+.hp-footer-note {
+  padding: 20px 0 36px;
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.6;
 }
-#site-nav ~ main section ul li {
-  padding: 10px 0;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
+
+/* Agents push section */
+.hp-agents {
+  padding: 28px 0 32px;
+  text-align: center;
 }
-hr {
-  border: none;
-  border-top: 1px solid #e8e0d8;
-  margin: 8px 0;
+.hp-agents h2 { font-size: 1.2em; margin: 0 0 10px; }
+.hp-agents p { font-size: 0.97em; color: #444; margin: 0 0 16px; }
+
+/* Desktop bump-ups */
+@media (min-width: 641px) {
+  .hp-main { padding: 0 24px; margin-top: 16px; }
+  .hp-hero { padding: 40px 0 32px; }
+  .hp-hero h1 { font-size: 2em; }
+  .hp-hero p { font-size: 1.1em; }
+  .hp-section h2 { font-size: 1.35em; }
 }
 </style>
 </head>
@@ -46,21 +125,21 @@ hr {
 <body>
   <script src="/nav.js" defer></script>
 
-  <main style="max-width:700px;margin:20px auto;font-family:Georgia,serif;line-height:1.7;padding:0 16px;">
+  <main class="hp-main">
 
-    <!-- SECTION 1: HERO -->
-    <section style="padding:40px 0 30px;text-align:center;">
-      <h1 style="font-size:2em;margin-bottom:12px;">Find, Finance, and Buy Horse Property the Right Way</h1>
-      <p style="font-size:1.1em;margin:0 auto;">Learn zoning, financing, and hidden risks before you buy. Then connect with experienced horse property agents near you.</p>
-      <a href="https://www.horsepropertyagents.com" target="_blank" rel="noopener" style="display:block;margin:16px auto 0;padding:14px 28px;background:#8b5e3c;color:#fff;text-decoration:none;font-size:1em;border-radius:4px;text-align:center;width:100%;max-width:320px;box-sizing:border-box;">Find a Horse Property Agent Near You</a>
+    <!-- HERO -->
+    <section class="hp-hero">
+      <h1>Find, Finance, and Buy Horse Property the Right Way</h1>
+      <p>Learn zoning, financing, and hidden risks before you buy. Then connect with experienced horse property agents near you.</p>
+      <a class="hp-cta" href="https://www.horsepropertyagents.com" target="_blank" rel="noopener">Find a Horse Property Agent Near You</a>
     </section>
 
-    <hr>
+    <hr class="hp-hr">
 
-    <!-- SECTION 2: FEATURED CONTENT -->
-    <section style="padding:28px 0;">
-      <h2 style="margin-bottom:16px;">Essential Reading</h2>
-      <ul style="padding-left:18px;">
+    <!-- ESSENTIAL READING -->
+    <section class="hp-section">
+      <h2>Essential Reading</h2>
+      <ul>
         <li><a href="/qa/usda-loan-horse-property.html">USDA Loans for Horse Property</a></li>
         <li><a href="/qa/zoning-that-allows-horses.html">Zoning That Allows Horses</a></li>
         <li><a href="/guides/horse-property-red-flags.html">Horse Property Red Flags</a></li>
@@ -70,11 +149,11 @@ hr {
       </ul>
     </section>
 
-    <hr>
+    <hr class="hp-hr">
 
-    <!-- SECTION 3: CATEGORY BLOCKS -->
-    <section style="padding:28px 0;">
-      <h2 style="margin-bottom:20px;">Browse by Category</h2>
+    <!-- BROWSE BY CATEGORY -->
+    <section class="hp-section">
+      <h2>Browse by Category</h2>
 
       <h3>Top Horse Property Markets</h3>
       <ul>
@@ -82,7 +161,7 @@ hr {
         <li><a href="/markets/ocala-fl.html">Ocala, Florida</a></li>
         <li><a href="/markets/lexington-ky.html">Lexington, Kentucky</a></li>
         <li><a href="/markets/wellington-fl.html">Wellington, Florida</a></li>
-        <li><a href="/markets/scottsdale-az.html">Scottsdale & Cave Creek, Arizona</a></li>
+        <li><a href="/markets/scottsdale-az.html">Scottsdale &amp; Cave Creek, Arizona</a></li>
         <li><a href="/markets/">Browse All Markets →</a></li>
       </ul>
 
@@ -123,21 +202,22 @@ hr {
       </ul>
     </section>
 
-    <hr>
+    <hr class="hp-hr">
 
-    <!-- SECTION 4: AGENTS PUSH -->
-    <section style="padding:36px 0 40px;">
-      <h2 style="margin-bottom:12px;">Work With the Right Horse Property Agent</h2>
+    <!-- AGENTS PUSH -->
+    <section class="hp-agents">
+      <h2>Work With the Right Horse Property Agent</h2>
       <p>Horse properties require specialized knowledge. Connect with agents who understand zoning, water rights, and equestrian use.</p>
-      <a href="https://www.horsepropertyagents.com" target="_blank" rel="noopener" style="display:block;margin:16px auto 0;padding:14px 28px;background:#8b5e3c;color:#fff;text-decoration:none;font-size:1em;border-radius:4px;text-align:center;width:100%;max-width:320px;box-sizing:border-box;">Find Agents Near You</a>
+      <a class="hp-cta" href="https://www.horsepropertyagents.com" target="_blank" rel="noopener">Find Agents Near You</a>
     </section>
 
-    <hr>
+    <hr class="hp-hr">
 
-    <!-- SECTION 5: FOOTER SEO TEXT -->
-    <section style="padding:24px 0 40px;">
-      <p style="color:#555;font-size:0.95em;">HorsePropertyGuide.com provides expert guidance on buying horse property, including financing options, zoning requirements, land use restrictions, and risk evaluation. Whether you're purchasing a small horse setup or a large equestrian facility, understanding these factors is critical before you invest.</p>
-    </section>
+    <!-- FOOTER SEO -->
+    <div class="hp-footer-note">
+      HorsePropertyGuide.com provides expert guidance on buying horse property, including financing options, zoning requirements, land use restrictions, and risk evaluation. Whether you're purchasing a small horse setup or a large equestrian facility, understanding these factors is critical before you invest.
+    </div>
+
   </main>
 </body>
 </html>
