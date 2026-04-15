@@ -77,9 +77,13 @@
     '@media (min-width: 641px) { .logo-short { display: none; } .nav-inner { padding: 0 24px; } .nav-secondary { padding: 0 24px; } }',
 
     /* Page content styles */
-    '.page-main { max-width: 700px; margin: 20px auto; font-family: Georgia,serif; line-height: 1.7; padding: 0 16px; }',
-    '.page-main ul li { padding: 6px 0; min-height: 44px; display: flex; align-items: center; }',
-    '@media (max-width: 480px) { .page-main h1 { font-size: 1.35em; line-height: 1.3; } }',
+    '.page-main { max-width: 700px; margin: 12px auto 0; font-family: Georgia,serif; line-height: 1.7; padding: 0 16px 40px; }',
+    '.page-main ul li { padding: 9px 0; min-height: 44px; display: flex; align-items: center; border-bottom: 1px solid #f0ebe4; }',
+    '.page-main ul li:last-child { border-bottom: none; }',
+    '.page-main a { color: #2c5f2e; }',
+    '.page-main p { margin-top: 0; }',
+    '@media (max-width: 480px) { .page-main h1 { font-size: 1.35em; line-height: 1.3; margin-top: 16px; } .page-main h2 { font-size: 1.1em; } }',
+    '@media (min-width: 641px) { .page-main { padding: 0 24px 40px; margin-top: 20px; } }',
     'main > h1 { margin-top: 20px; }',
     'main h2:not(.related-heading) { margin-top: 36px; padding-top: 4px; }',
     'h2.related-heading { margin-top: 32px; padding-top: 16px; border-top: 2px solid #e8e0d8; font-size: 1em; text-transform: uppercase; letter-spacing: .06em; color: #666; }',
@@ -88,6 +92,10 @@
     'h2.related-heading + ul li:last-child { border-bottom: none; }',
     'h2.related-heading + ul li a { color: #2c5f2e; text-decoration: none; font-size: .97em; }',
     'h2.related-heading + ul li a:hover { text-decoration: underline; }',
+    '#next-page-link { margin-top: 30px; margin-bottom: 36px; padding: 16px; background: #f4f9f4; border-left: 4px solid #8b5e3c; border-radius: 4px; }',
+    '#next-page-link div:first-child { font-size: 0.8em; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }',
+    '#next-page-link a { font-size: 1em; color: #8b5e3c; text-decoration: none; font-weight: bold; line-height: 1.4; display: block; min-height: 44px; display: flex; align-items: center; }',
+    '#next-page-link a:hover { text-decoration: underline; }',
   ].join('\n');
 
   document.head.appendChild(style);
