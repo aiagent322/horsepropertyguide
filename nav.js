@@ -84,6 +84,8 @@
     '.page-main p { margin-top: 0; }',
     '@media (max-width: 480px) { .page-main h1 { font-size: 1.35em; line-height: 1.3; margin-top: 16px; } .page-main h2 { font-size: 1.1em; } }',
     '@media (min-width: 641px) { .page-main { padding: 0 24px 40px; margin-top: 20px; } }',
+    '@media (min-width: 900px) { .page-main { max-width: 860px; } .hp-main { max-width: 860px; } }',
+    '@media (min-width: 1200px) { .page-main { max-width: 1020px; } .hp-main { max-width: 1020px; } }',
     'main > h1 { margin-top: 20px; }',
     'main h2:not(.related-heading) { margin-top: 36px; padding-top: 4px; }',
     'h2.related-heading { margin-top: 32px; padding-top: 16px; border-top: 2px solid #e8e0d8; font-size: 1em; text-transform: uppercase; letter-spacing: .06em; color: #666; }',
@@ -114,3 +116,4 @@
     if (nav && !nav.contains(e.target)) nav.classList.remove('open');
   });
 })();
+
