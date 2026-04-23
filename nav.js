@@ -3,14 +3,15 @@
 
   const primary = [
     { href: '/markets/', label: 'Markets' },
-    { href: '/financing/', label: 'Financing' },
     { href: '/guides/', label: 'Guides' },
     { href: '/qa/', label: 'Q&A' },
     { href: '/glossary/', label: 'Glossary' },
     { href: 'https://www.horsepropertyagents.com', label: 'Find an Agent' },
+    { href: 'https://horsepropertyfinancing.com', label: 'Get Financing' },
   ];
 
   const secondary = [
+    { href: '/financing/', label: 'Financing Guide' },
     { href: '/guides/horse-property-wells.html', label: 'Wells' },
     { href: '/guides/horse-property-red-flags.html', label: 'Red Flags' },
     { href: '/guides/horse-property-survey.html', label: 'Surveys' },
@@ -61,8 +62,8 @@
     '.nav-links a { font-family: Georgia,serif; font-size: .82rem; color: rgba(255,255,255,.88); text-decoration: none; padding: 6px 10px; border-radius: 3px; white-space: nowrap; display: block; transition: background .15s,color .15s; }',
     '.nav-links a:hover { background: rgba(255,255,255,.13); color: #fff; }',
     '.nav-links a.active { color: #fff; font-weight: 700; background: rgba(255,255,255,.1); }',
-    '.nav-primary li:last-child a { background: #8b5e3c; color: #fff; font-weight: 700; padding: 6px 12px; }',
-    '.nav-primary li:last-child a:hover { background: #a06b44; }',
+    '.nav-primary li:nth-last-child(-n+2) a { background: #8b5e3c; color: #fff; font-weight: 700; padding: 6px 12px; }',
+    '.nav-primary li:nth-last-child(-n+2) a:hover { background: #a06b44; }',
     '.nav-secondary-bar { background: rgba(0,0,0,.18); border-top: 1px solid rgba(255,255,255,.08); }',
     '.nav-secondary { max-width: 960px; margin: 0 auto; padding: 0 16px; flex-wrap: wrap; gap: 0; }',
     '.nav-secondary a { font-size: .78rem; padding: 5px 9px; color: rgba(255,255,255,.75); }',
