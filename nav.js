@@ -1,5 +1,8 @@
 (function(){
   const path = window.location.pathname;
+
+  // Homepage has its own header — skip nav injection
+  if(path === '/' || path === '/index.html') return;
   const links = [
     { href: '/',         label: 'Find an Agent' },
     { href: '/agents/',  label: 'All Agents' },
