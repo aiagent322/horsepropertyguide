@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bridle &amp; Bit Network — Horse Property Resources | HorsePropertyGuide.com</title>
+<meta name="description" content="The full Bridle &amp; Bit Network — equestrian websites, tools, calendars, directories, and marketplaces covering horse property, team roping, reining, saddles, trainers, and more.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://horsepropertyguide.com/network/">
+<script src="/nav.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6f8;color:#1f2933;line-height:1.6}
+:root{
+  --primary:#0b3c5d;
+  --gold:#b8860b;
+  --gold-light:#d4a017;
+  --text:#1f2933;
+  --text-mid:#4a5568;
+  --text-light:#6b7280;
+  --border:#e5e7eb;
+  --bg:#ffffff;
+  --bg-alt:#f4f6f8;
+  --radius:6px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 6px rgba(0,0,0,0.07);
+  --max-w:1100px;
+}
+
+/* ── HERO ── */
+.page-hero{
+  background:linear-gradient(135deg,#0b3c5d 0%,#144e78 100%);
+  padding:40px 20px 36px;
+  text-align:center;
+}
+.page-hero h1{
+  font-size:clamp(1.4rem,4vw,2rem);
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.01em;
+  margin-bottom:10px;
+}
+.page-hero p{
+  font-size:clamp(0.88rem,2.5vw,1rem);
+  color:rgba(255,255,255,0.82);
+  max-width:640px;
+  margin:0 auto;
+  line-height:1.65;
+}
+.bb-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:4px;
+  padding:5px 12px;
+  font-size:0.75rem;font-weight:700;
+  color:rgba(255,255,255,0.9);
+  letter-spacing:0.06em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+/* ── WRAP ── */
+.wrap{max-width:var(--max-w);margin:0 auto;padding:36px 16px 60px}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-size:0.7rem;font-weight:800;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:14px;padding-bottom:8px;
+  border-bottom:2px solid var(--border);
+}
+
+/* ── GRID ── */
+.network-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin-bottom:36px;
+}
+@media(min-width:540px){.network-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:860px){.network-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ── CARD ── */
+.net-card{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow 0.15s,transform 0.15s;
+  text-decoration:none;
+  color:inherit;
+}
+.net-card:hover{
+  box-shadow:var(--shadow-md);
+  transform:translateY(-2px);
+}
+.card-top{display:flex;align-items:flex-start;gap:10px}
+.card-thumb{
+  width:44px;height:44px;border-radius:4px;
+  object-fit:cover;flex-shrink:0;
+  background:var(--bg-alt);
+}
+.card-thumb-placeholder{
+  width:44px;height:44px;border-radius:4px;flex-shrink:0;
+  background:var(--primary);
+  display:flex;align-items:center;justify-content:center;
+}
+.card-thumb-placeholder span{font-size:1.1rem}
+.card-meta{flex:1;min-width:0}
+.card-name{
+  font-size:0.88rem;font-weight:700;
+  color:var(--primary);
+  line-height:1.25;
+  margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.card-tag{
+  display:inline-block;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.05em;
+  text-transform:uppercase;
+  background:var(--bg-alt);color:var(--text-light);
+  border-radius:3px;padding:2px 6px;
+}
+.card-tag.gold{background:#fef3c7;color:#92400e}
+.card-desc{
+  font-size:0.8rem;color:var(--text-mid);
+  line-height:1.5;
+  flex:1;
+}
+.card-stat{
+  font-size:0.72rem;font-weight:600;color:var(--gold);
+  border-top:1px solid var(--border);
+  padding-top:8px;margin-top:auto;
+}
+.card-visit{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:0.75rem;font-weight:700;
+  color:var(--primary);
+  border-top:1px solid var(--border);
+  padding-top:8px;margin-top:auto;
+  text-decoration:none;
+}
+.card-visit svg{width:11px;height:11px;stroke:currentColor;stroke-width:2.5;fill:none;flex-shrink:0}
+
+/* ── FOOTER ── */
+.site-footer{
+  background:#1a1208;
+  padding:32px 20px;
+  text-align:center;
+}
+.site-footer p{
+  font-family:Georgia,serif;font-size:0.72rem;
+  color:#8a7a6a;letter-spacing:0.04em;
+  max-width:600px;margin:0 auto;line-height:1.7;
+}
+.site-footer a{color:#c9973a;text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="bb-badge">Bridle &amp; Bit Network</div>
+  <h1>Horse Property &amp; Equestrian Resources</h1>
+  <p>HorsePropertyGuide.com is part of the Bridle &amp; Bit Network — Arizona's premier equestrian publishing group since 1978. Browse our full suite of horse property tools, agent directories, financing guides, and western lifestyle sites below.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- HORSE PROPERTY -->
+  <div class="section-label">Horse Property</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://horsepropertyguide.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🏡</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorsePropertyGuide.com</div>
+          <span class="card-tag gold">Guide</span>
+        </div>
+      </div>
+      <div class="card-desc">Complete guide to buying, selling, and developing horse property — zoning, barns, water rights, and more.</div>
+    </a>
+
+    <a class="net-card" href="https://horsepropertyagents.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🤝</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorsePropertyAgents.com</div>
+          <span class="card-tag">Directory</span>
+        </div>
+      </div>
+      <div class="card-desc">Find specialized real estate agents who understand the unique demands of buying and selling horse property.</div>
+      <div class="card-stat">335+ Agents Nationwide</div>
+    </a>
+
+    <a class="net-card" href="https://horsepropertyfinancing.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>💰</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorsePropertyFinancing.com</div>
+          <span class="card-tag">Guide</span>
+        </div>
+      </div>
+      <div class="card-desc">Loan products and financing options designed specifically for equestrian and horse property purchases.</div>
+    </a>
+
+    <a class="net-card" href="https://wickenborghorseproperty.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🌵</span></div>
+        <div class="card-meta">
+          <div class="card-name">WickenburgHorseProperty.com</div>
+          <span class="card-tag">Real Estate</span>
+        </div>
+      </div>
+      <div class="card-desc">Horse properties for sale in Wickenburg, Arizona — the Horse Capital of the World.</div>
+    </a>
+
+  </div>
+
+  <!-- TEAM ROPING -->
+  <div class="section-label">Team Roping</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://teamroping.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🤠</span></div>
+        <div class="card-meta">
+          <div class="card-name">TeamRoping.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">AI-powered event calendar with 320+ events, Near Me search, arena directory, producer profiles, and Q&amp;A.</div>
+      <div class="card-stat">333 Events · 293 Arenas</div>
+    </a>
+
+    <a class="net-card" href="https://teamropingvideos.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🎬</span></div>
+        <div class="card-meta">
+          <div class="card-name">TeamRopingVideos.com</div>
+          <span class="card-tag">Video</span>
+        </div>
+      </div>
+      <div class="card-desc">The best team roping instructional and competition videos — learn from the top hands in the sport.</div>
+    </a>
+
+  </div>
+
+  <!-- REINING -->
+  <div class="section-label">Reining</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://reininghorses.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🐴</span></div>
+        <div class="card-meta">
+          <div class="card-name">ReiningHorses.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">Reining trainer directory, show results archive, and Hall of Fame with 147 trainers across 23 regions.</div>
+      <div class="card-stat">147 Trainers · 127-Member HOF</div>
+    </a>
+
+    <a class="net-card" href="https://reininghalloffame.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🏆</span></div>
+        <div class="card-meta">
+          <div class="card-name">ReiningHallOfFame.com</div>
+          <span class="card-tag">Authority</span>
+        </div>
+      </div>
+      <div class="card-desc">127 individual Hall of Fame profiles — the definitive reining history and legend archive.</div>
+      <div class="card-stat">127 HOF Profiles</div>
+    </a>
+
+    <a class="net-card" href="https://reininghorsevideos.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🎬</span></div>
+        <div class="card-meta">
+          <div class="card-name">ReiningHorseVideos.com</div>
+          <span class="card-tag">Video</span>
+        </div>
+      </div>
+      <div class="card-desc">Reining instructional and competition video library — patterns, maneuvers, and show coverage.</div>
+    </a>
+
+  </div>
+
+  <!-- SADDLES -->
+  <div class="section-label">Western Saddles</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://westernsaddles.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🪢</span></div>
+        <div class="card-meta">
+          <div class="card-name">WesternSaddles.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">19-page western saddle authority hub — history series, maker guide, anatomy, FAQ, and matchmaker for 103 saddles.</div>
+    </a>
+
+    <a class="net-card" href="https://reiningsaddles.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🏇</span></div>
+        <div class="card-meta">
+          <div class="card-name">ReiningSaddles.com</div>
+          <span class="card-tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="card-desc">Reining saddles — new and certified used — with matchmaker tool across 103 hand-selected saddles.</div>
+    </a>
+
+    <a class="net-card" href="https://cuttingsaddles.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🐄</span></div>
+        <div class="card-meta">
+          <div class="card-name">CuttingSaddles.com</div>
+          <span class="card-tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="card-desc">Cutting horse saddles — premium used and new saddles built for the cutting pen.</div>
+    </a>
+
+    <a class="net-card" href="https://certifiedusedsaddles.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>✅</span></div>
+        <div class="card-meta">
+          <div class="card-name">CertifiedUsedSaddles.com</div>
+          <span class="card-tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="card-desc">Certified pre-owned saddles across all disciplines — inspected, valued, and matched to your riding style.</div>
+    </a>
+
+    <a class="net-card" href="https://ranchhorsesaddles.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🌾</span></div>
+        <div class="card-meta">
+          <div class="card-name">RanchHorseSaddles.com</div>
+          <span class="card-tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="card-desc">Ranch saddles built for the daily work of the American cowboy — durable, functional, purpose-built.</div>
+    </a>
+
+    <a class="net-card" href="https://cowhorssesaddles.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🐂</span></div>
+        <div class="card-meta">
+          <div class="card-name">CowHorseSaddles.com</div>
+          <span class="card-tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="card-desc">Cow horse saddles — the working saddles of the NRCHA pen and bridle horse world.</div>
+    </a>
+
+  </div>
+
+  <!-- HORSES & TRAINERS -->
+  <div class="section-label">Horses &amp; Trainers</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://horsetrainer.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>👢</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorseTrainer.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">1,732 horse trainers nationwide with 672 Q&amp;A entries across 26 disciplines — find the right trainer for your horse.</div>
+      <div class="card-stat">1,732 Trainers · 672 Q&amp;A</div>
+    </a>
+
+    <a class="net-card" href="https://stallionmatchmaker.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🐎</span></div>
+        <div class="card-meta">
+          <div class="card-name">StallionMatchMaker.com</div>
+          <span class="card-tag">Directory</span>
+        </div>
+      </div>
+      <div class="card-desc">242 stallions across 13 stations with disc-strength scoring — find the right breeding match for your mare.</div>
+      <div class="card-stat">242 Stallions · 13 Stations</div>
+    </a>
+
+    <a class="net-card" href="https://horsebreeding.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🧬</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorseBreeding.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">Parallel stallion directory with breeding guides and reining station profiles including Toyon Ranch.</div>
+    </a>
+
+    <a class="net-card" href="https://worldsgreatesthorseman.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🥇</span></div>
+        <div class="card-meta">
+          <div class="card-name">WorldsGreatestHorseman.com</div>
+          <span class="card-tag">Authority</span>
+        </div>
+      </div>
+      <div class="card-desc">27 champion profiles from the World's Greatest Horseman competition — the ultimate all-around title.</div>
+      <div class="card-stat">27 Champion Profiles</div>
+    </a>
+
+  </div>
+
+  <!-- CALENDARS -->
+  <div class="section-label">Event Calendars</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://horsecalendar.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>📅</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorseCalendar.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">Arizona horse show and event calendar — complete guide to shows, clinics, and competitions statewide.</div>
+    </a>
+
+  </div>
+
+  <!-- MEDIA & COMMUNITY -->
+  <div class="section-label">Media &amp; Community</div>
+  <div class="network-grid">
+
+    <a class="net-card" href="https://bridleandbit.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>📰</span></div>
+        <div class="card-meta">
+          <div class="card-name">BridleAndBit.com</div>
+          <span class="card-tag gold">Magazine</span>
+        </div>
+      </div>
+      <div class="card-desc">Arizona's premier equestrian publication since 1978 — team roping, reining, western lifestyle, and industry news.</div>
+      <div class="card-stat">Est. 1978 · Arizona</div>
+    </a>
+
+    <a class="net-card" href="https://podcastcorral.com">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🎙️</span></div>
+        <div class="card-meta">
+          <div class="card-name">PodcastCorral.com</div>
+          <span class="card-tag">Directory</span>
+        </div>
+      </div>
+      <div class="card-desc">Western and equestrian podcast directory — 129 shows across 12 categories including reining, roping, and ranch.</div>
+      <div class="card-stat">129 Shows · 12 Categories</div>
+    </a>
+
+    <a class="net-card" href="https://horseinsurance.ai">
+      <div class="card-top">
+        <div class="card-thumb-placeholder"><span>🛡️</span></div>
+        <div class="card-meta">
+          <div class="card-name">HorseInsurance.AI</div>
+          <span class="card-tag gold">AI Platform</span>
+        </div>
+      </div>
+      <div class="card-desc">Complete horse insurance guide — mortality, major medical, liability, and farm coverage explained.</div>
+    </a>
+
+  </div>
+
+</div><!-- /wrap -->
+
+<div class="site-footer">
+  <p>The Bridle &amp; Bit Network &mdash; Arizona's premier equestrian publishing group since 1978.<br>
+  <a href="https://bridleandbit.com">Bridle &amp; Bit Magazine</a> &nbsp;&middot;&nbsp;
+  <a href="https://horsepropertyguide.com">HorsePropertyGuide.com</a> &nbsp;&middot;&nbsp;
+  <a href="https://teamroping.ai">TeamRoping.AI</a></p>
+</div>
+
+</body>
+</html>
