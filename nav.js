@@ -10,6 +10,7 @@
     { href: '/qa/',      label: 'Q&A' },
     { href: 'https://horsepropertyfinancing.com', label: 'Financing', external: true },
     { href: 'https://horsepropertyagents.com',    label: 'Agents',    external: true },
+    { href: '/network/', label: 'Network Links' },
     { href: 'https://bridleandbit.com',           label: 'Bridle & Bit', external: true },
   ];
 
